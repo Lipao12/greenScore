@@ -5,6 +5,7 @@ import { s } from "./styles";
 type Props = {
   title: string;
   subtitle: string;
+  progress: number;
   icon?: React.ComponentType<{
     width?: number;
     height?: number;
@@ -12,7 +13,12 @@ type Props = {
   }>;
 };
 
-export function GoalProgreeCard({ title, subtitle, icon: Icon }: Props) {
+export function GoalProgressCard({
+  title,
+  subtitle,
+  progress,
+  icon: Icon,
+}: Props) {
   return (
     <View style={s.container}>
       <View style={{ flexDirection: "row", gap: 16, alignItems: "center" }}>
@@ -21,6 +27,19 @@ export function GoalProgreeCard({ title, subtitle, icon: Icon }: Props) {
           <Text style={s.title}>{title}</Text>
           {subtitle && <Text style={s.subtitle}>{subtitle}</Text>}
         </View>
+      </View>
+      {/* Barra de progresso */}
+      <View style={s.progressBarContainer}>
+        <View style={s.progressBarBackground}>
+          <View
+            style={{
+              height: "100%",
+              width: `${progress}%`,
+              backgroundColor: colors.green.base,
+            }}
+          />
+        </View>
+        <Text style={s.progressText}>{progress}% completo</Text>
       </View>
     </View>
   );

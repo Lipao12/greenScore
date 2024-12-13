@@ -44,29 +44,50 @@ export function FastInfosCard({
       {info_text ? null : (
         <View>
           {type === "progress" ? (
-            <ProgressChart
-              data={{
-                data: [progress ? progress : 0], // Progresso (0 a 1)
-              }}
-              width={100}
-              height={100}
-              strokeWidth={8}
-              radius={32}
-              hideLegend
-              chartConfig={{
-                backgroundColor: colors.gray[100],
-                backgroundGradientFrom: colors.gray[100],
-                backgroundGradientTo: colors.gray[100],
-                decimalPlaces: 2,
-                color: (opacity = 1) => `rgba(0, 150, 0, ${opacity})`,
-                style: {
-                  borderRadius: 8,
-                },
-              }}
+            <View
               style={{
-                marginVertical: 8,
+                position: "relative",
+                alignItems: "center",
+                justifyContent: "center",
               }}
-            />
+            >
+              <ProgressChart
+                data={{
+                  data: [progress ? progress : 0], // Progresso (0 a 1)
+                }}
+                width={100}
+                height={100}
+                strokeWidth={8}
+                radius={32}
+                hideLegend
+                chartConfig={{
+                  backgroundColor: colors.gray[100],
+                  backgroundGradientFrom: colors.gray[100],
+                  backgroundGradientTo: colors.gray[100],
+                  decimalPlaces: 2,
+                  color: (opacity = 1) => `rgba(0, 150, 0, ${opacity})`,
+                  style: {
+                    borderRadius: 8,
+                  },
+                }}
+                style={{
+                  marginVertical: 8,
+                }}
+              />
+              {subtitle && (
+                <Text
+                  style={{
+                    position: "absolute",
+                    fontSize: 16,
+                    fontWeight: "bold",
+                    color: colors.gray[600],
+                    textAlign: "center",
+                  }}
+                >
+                  {subtitle}
+                </Text>
+              )}
+            </View>
           ) : type === "bar" && barData ? (
             <BarChart
               data={{
@@ -93,7 +114,6 @@ export function FastInfosCard({
           ) : null}
         </View>
       )}
-      {subtitle && <Text style={s.subtitle}>{subtitle}</Text>}
     </View>
   );
 }

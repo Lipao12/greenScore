@@ -8,7 +8,7 @@ export function FastInfos() {
   return (
     <View style={s.container}>
       <FastInfosCard
-        title="Nível"
+        title="Ecopoints"
         subtitle="3"
         progress={0.4}
         type="progress"
