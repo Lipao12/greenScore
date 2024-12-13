@@ -1,10 +1,11 @@
+import { colors } from "@/styles/colors";
 import { Dimensions, View } from "react-native";
 import { LineChart } from "react-native-chart-kit";
 import { Header } from "../header";
 import { Info } from "../info_percetagem";
 
 export function FootprintDashboard() {
-  const screenWidth = Dimensions.get("window").width - 16 * 2;
+  const screenWidth = Dimensions.get("window").width;
 
   const data = {
     labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Ago"],
@@ -21,16 +22,25 @@ export function FootprintDashboard() {
       <Header />
       <Info />
 
-      <View>
+      <View
+        style={{
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
         <LineChart
           data={data}
-          width={screenWidth}
+          width={screenWidth * 0.9}
           height={220}
+          withInnerLines={false}
+          withHorizontalLabels={false}
+          withOuterLines={false}
+          fromZero={true}
           chartConfig={{
-            fillShadowGradientFrom: "#81c784",
-            fillShadowGradientTo: "#4caf50",
-            backgroundGradientFrom: "#e0f7fa",
-            backgroundGradientTo: "#b2ebf2",
+            fillShadowGradientFrom: colors.green.light, //"#81c784",
+            fillShadowGradientTo: colors.green.dark, //"#4caf50",
+            backgroundGradientFrom: colors.gray[100], //"#e0f7fa",
+            backgroundGradientTo: colors.gray[100], //"#b2ebf2",
             decimalPlaces: 2, // Casas decimais no eixo Y
             color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
             labelColor: (opacity = 1) => `rgba(90, 90, 90, ${opacity})`,
@@ -42,11 +52,14 @@ export function FootprintDashboard() {
               strokeWidth: "1",
               stroke: "#6abf69",
             },
+            propsForLabels: {},
           }}
           bezier // Suaviza as linhas
           style={{
             marginVertical: 8,
             borderRadius: 16,
+            paddingRight: 20,
+            paddingLeft: 50,
           }}
         />
       </View>
