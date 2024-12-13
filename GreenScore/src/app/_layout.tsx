@@ -29,7 +29,9 @@ export default function Layout() {
         headerShown: false,
         contentStyle: { backgroundColor: colors.gray[100] },
       }}
-    ></Stack>
+    >
+      <Stack.Screen name="(tabs)" />
+    </Stack>
     //</GestureHandlerRootView>
   );
 }
