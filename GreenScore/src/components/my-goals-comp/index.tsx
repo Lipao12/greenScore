@@ -22,13 +22,6 @@ export function MyGoalsComp() {
     },
   ]);
 
-  const handleCompleteTask = (taskId: number) => {
-    setTasks((prevTasks) =>
-      prevTasks.map((task) =>
-        task.id === taskId ? { ...task, isCompleted: true } : task
-      )
-    );
-  };
   return (
     <View style={s.container}>
       <HeaderHome
