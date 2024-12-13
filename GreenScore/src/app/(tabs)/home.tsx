@@ -12,6 +12,7 @@ export default function Home() {
       contentContainerStyle={{
         paddingHorizontal: 16,
         paddingBottom: 16,
+        paddingTop: 40,
         backgroundColor: colors.gray[100],
       }}
       showsVerticalScrollIndicator={false}
