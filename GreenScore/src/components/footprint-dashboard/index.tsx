@@ -8,7 +8,7 @@ export function FootprintDashboard() {
   const screenWidth = Dimensions.get("window").width;
 
   const data = {
-    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Ago"],
+    labels: ["Jan", "Fev", "Mar", "Apr", "Mai", "Jun", "Jul", "Ago"],
     datasets: [
       {
         data: [10, 45, 32, 20, 35, 22, 41.7, 39.6],
@@ -31,7 +31,7 @@ export function FootprintDashboard() {
         <LineChart
           data={data}
           width={screenWidth * 0.9}
-          height={220}
+          height={170}
           withInnerLines={false}
           withHorizontalLabels={false}
           withOuterLines={false}

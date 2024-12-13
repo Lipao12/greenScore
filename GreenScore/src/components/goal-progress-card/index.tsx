@@ -28,13 +28,12 @@ export function GoalProgressCard({
 
   const handleCheck = () => {
     const newProgress = isChecked
-      ? Math.max(progress - 10, 0) // Reduz o progresso ao desmarcar
-      : Math.min(progress + 10, 100); // Aumenta o progresso ao marcar
+      ? Math.max(progress - 10, 0)
+      : Math.min(progress + 10, 100);
 
     setProgress(newProgress);
     setIsChecked(!isChecked);
 
-    // Animação da barra de progresso
     Animated.timing(animatedProgress, {
       toValue: newProgress,
       duration: 500,

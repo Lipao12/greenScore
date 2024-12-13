@@ -1,7 +1,4 @@
-import { DailyTips } from "@/components/daily-tips";
-import { FastInfos } from "@/components/fast-infos";
 import { FootprintDashboard } from "@/components/footprint-dashboard";
-import { HeaderHome } from "@/components/header-home";
 import { MyGoalsComp } from "@/components/my-goals-comp";
 import { colors } from "@/styles/colors";
 import { ScrollView } from "react-native";
@@ -14,17 +11,18 @@ export default function Home() {
         paddingBottom: 16,
         paddingTop: 40,
         backgroundColor: colors.gray[100],
+        flex: 1,
       }}
       showsVerticalScrollIndicator={false}
     >
-      <HeaderHome
+      {/*<HeaderHome
         title={"Bem vindo de volta!"}
         subtitle={"Olá, Filipe Nunes"}
-      />
+      />*/}
       <FootprintDashboard />
-      <FastInfos />
+      {/*<FastInfos />*/}
       <MyGoalsComp />
-      <DailyTips />
+      {/*<DailyTips />*/}
     </ScrollView>
   );
 }
