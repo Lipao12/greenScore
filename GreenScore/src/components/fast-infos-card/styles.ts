@@ -50,5 +50,6 @@ export const s = StyleSheet.create({
     flexWrap: "wrap", 
     textAlign: "justify", 
     marginVertical: 4,
+    paddingHorizontal: 6
   },
 });
