@@ -1,10 +1,34 @@
-import { IconBath, IconBike } from "@tabler/icons-react-native";
+import { useState } from "react";
 import { View } from "react-native";
 import { GoalProgressCard } from "../goal-progress-card";
 import { HeaderHome } from "../header-home";
 import { s } from "./styles";
 
 export function MyGoalsComp() {
+  const [tasks, setTasks] = useState([
+    {
+      id: 1,
+      title: "Reduzir banho para 7 min",
+      subtitle: "Faltam 2 dias",
+      progress: 80,
+      isCompleted: false,
+    },
+    {
+      id: 2,
+      title: "Usar transporte público",
+      subtitle: "Faltam 3 dias",
+      progress: 50,
+      isCompleted: false,
+    },
+  ]);
+
+  const handleCompleteTask = (taskId: number) => {
+    setTasks((prevTasks) =>
+      prevTasks.map((task) =>
+        task.id === taskId ? { ...task, isCompleted: true } : task
+      )
+    );
+  };
   return (
     <View style={s.container}>
       <HeaderHome
@@ -12,30 +36,14 @@ export function MyGoalsComp() {
         subtitle={"Complete suas metas e ganhe mais EcoPontos!"}
       />
 
-      <GoalProgressCard
-        title="Use transporte público ou bicicleta 3 vezes por semana."
-        subtitle="Faltam 2 dias"
-        progress={70}
-        icon={
-          IconBike as React.ComponentType<{
-            width?: number;
-            height?: number;
-            color?: string;
-          }>
-        }
-      />
-      <GoalProgressCard
-        title="Reduza o tempo do banho para 7 minutos por dia."
-        subtitle="Faltam 5 dias"
-        progress={50}
-        icon={
-          IconBath as React.ComponentType<{
-            width?: number;
-            height?: number;
-            color?: string;
-          }>
-        }
-      />
+      {tasks.map((task) => (
+        <GoalProgressCard
+          key={task.id}
+          title={task.title}
+          subtitle={task.subtitle}
+          progress={task.progress}
+        />
+      ))}
     </View>
   );
 }

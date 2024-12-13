@@ -17,7 +17,7 @@ export const s = StyleSheet.create({
     borderWidth: 1,
     borderColor: colors.gray[200],
     marginBottom: 16,
-    minHeight: 100,
+    minHeight: 120,
     alignSelf: "stretch",
   },
   textContainer: {
@@ -52,5 +52,29 @@ export const s = StyleSheet.create({
     marginTop: 4,
     fontSize: 12,
     color: colors.gray[500],
+  },
+  completeButton: {
+    marginTop: 16,
+    backgroundColor: colors.green.base,
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    borderRadius: 8,
+    alignItems: "center",
+  },
+  completeButtonText: {
+    fontSize: 14,
+    fontFamily: fontFamily.bold,
+    color: colors.gray[100],
+  },
+  checkContainer: {
+    marginTop: 16,
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 8,
+  },
+  checkText: {
+    fontSize: 14,
+    color: colors.gray[600],
+    fontFamily: fontFamily.regular,
   },
 });
