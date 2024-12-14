@@ -1,6 +1,6 @@
 import { IconBulb } from "@tabler/icons-react-native";
 import { Text, View } from "react-native";
-import { HeaderHome } from "../header-home";
+import { HeaderHome } from "../home/header-home";
 import { s } from "./styles";
 
 export function DailyTips() {

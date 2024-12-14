@@ -6,7 +6,8 @@ export const s = StyleSheet.create({
         flexDirection: "column",
         justifyContent: "flex-start",
         alignItems: "flex-start",
-        paddingVertical: 16
+        paddingVertical: 16,
+        gap: 10,
     },
     title: {
         fontSize: 24,
@@ -14,7 +15,7 @@ export const s = StyleSheet.create({
         color: colors.gray[600]
     },
     subtitle: {
-        fontSize: 12,
+        fontSize: 14,
         fontFamily: fontFamily.regular,
         color: colors.gray[400],
     },

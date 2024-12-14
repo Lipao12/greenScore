@@ -28,8 +28,12 @@ function Button({ children, style, isLoading = false, ...rest }: ButtonProps) {
   );
 }
 
-function Title({ children }: TextProps) {
-  return <Text style={s.title}>{children}</Text>;
+function Title({ children, style, ...rest }: TextProps) {
+  return (
+    <Text style={[s.title]} {...rest}>
+      {children}
+    </Text>
+  );
 }
 
 type IconProps = {

@@ -1,8 +1,8 @@
 import { IconBath, IconBike } from "@tabler/icons-react-native";
 import { useState } from "react";
 import { View } from "react-native";
+import { HeaderHome } from "../../header-home";
 import { GoalProgressCard } from "../goal-progress-card";
-import { HeaderHome } from "../header-home";
 import { s } from "./styles";
 
 export function MyGoalsComp() {

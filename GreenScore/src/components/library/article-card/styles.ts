@@ -6,8 +6,8 @@ export const s = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "flex-start",
     alignItems: "flex-start",
-    padding: 16, // Espaçamento interno
-    backgroundColor: colors.gray[100], // Fundo sutil
+    padding: 16, 
+    backgroundColor: colors.gray[100], 
     borderRadius: 12, // Bordas arredondadas
     shadowColor: "#000", // Sombra
     shadowOffset: {
