@@ -18,4 +18,8 @@ export const s = StyleSheet.create({
         fontFamily: fontFamily.regular,
         color: colors.gray[400],
     },
+    cardContainer:{
+        flexDirection: "row",
+        gap: 22
+    }
 })

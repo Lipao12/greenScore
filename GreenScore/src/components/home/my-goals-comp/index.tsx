@@ -1,8 +1,9 @@
+import CircularProgress from "@/components/circular-progress";
+import { colors } from "@/styles/colors";
 import { IconBath, IconBike } from "@tabler/icons-react-native";
 import { useState } from "react";
 import { View } from "react-native";
 import { HeaderHome } from "../../header-home";
-import { GoalProgressCard } from "../goal-progress-card";
 import { s } from "./styles";
 
 export function MyGoalsComp() {
@@ -11,6 +12,7 @@ export function MyGoalsComp() {
       id: 1,
       title: "Reduzir banho para 7 min",
       subtitle: "Faltam 2 dias",
+      color: colors.yellow,
       progress: 80,
       icon: IconBath as React.ComponentType<{
         width?: number;
@@ -22,6 +24,7 @@ export function MyGoalsComp() {
       id: 2,
       title: "Usar transporte público",
       subtitle: "Faltam 3 dias",
+      color: colors.blue,
       progress: 50,
       icon: IconBike as React.ComponentType<{
         width?: number;
@@ -38,15 +41,24 @@ export function MyGoalsComp() {
         subtitle={"Complete suas metas e ganhe mais EcoPontos!"}
       />
 
-      {tasks.map((task) => (
-        <GoalProgressCard
-          key={task.id}
-          title={task.title}
-          subtitle={task.subtitle}
-          progress={task.progress}
-          icon={task.icon}
-        />
-      ))}
+      {/*<GoalProgressCard
+  key={task.id}
+  title={task.title}
+  subtitle={task.subtitle}
+  progress={task.progress}
+  icon={task.icon}
+/>*/}
+      <View style={s.cardContainer}>
+        {tasks.map((task) => (
+          <CircularProgress
+            key={task.id}
+            title={task.title}
+            percentage={task.progress}
+            color={task.color}
+            icon={task.icon}
+          />
+        ))}
+      </View>
     </View>
   );
 }
