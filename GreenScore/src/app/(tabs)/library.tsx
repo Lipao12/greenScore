@@ -63,7 +63,6 @@ export default function Library() {
   const materias = articles.filter((item) => !item.article);
   const artigos = articles.filter((item) => item.article);
 
-  // Pequena animação para o icone da lampada, por hora essa página está muito crua
   const opacityAnim = useRef(new Animated.Value(0.3)).current;
   useEffect(() => {
     Animated.loop(
@@ -75,8 +74,8 @@ export default function Library() {
           useNativeDriver: true,
         }),
         Animated.timing(opacityAnim, {
-          toValue: 0.6, // Opacidade mínima
-          duration: 1000, // Tempo para "apagar"
+          toValue: 0.6,
+          duration: 1000,
           easing: Easing.inOut(Easing.ease),
           useNativeDriver: true,
         }),
@@ -91,6 +90,7 @@ export default function Library() {
         paddingBottom: 16,
         paddingTop: 40,
         backgroundColor: colors.gray[100],
+        flex: 1,
       }}
       showsVerticalScrollIndicator={false}
     >

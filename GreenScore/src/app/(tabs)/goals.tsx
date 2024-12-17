@@ -5,11 +5,12 @@ import { GoalsCard } from "@/components/my-goals/goals-card";
 import { colors } from "@/styles/colors";
 import { fontFamily } from "@/styles/font-family";
 import { IconBike } from "@tabler/icons-react-native";
-import { Link, router } from "expo-router";
+import { useRouter } from "expo-router";
 import React from "react";
 import { ScrollView, View } from "react-native";
 
 export default function Goals() {
+  const router = useRouter();
   return (
     <ScrollView
       contentContainerStyle={{
@@ -58,7 +59,7 @@ export default function Goals() {
         <Button
           style={{ width: "50%", height: 50 }}
           onPress={() => {
-            router.navigate("/create_task");
+            router.push("/create_task/create-task");
           }}
         >
           <Button.Title
