@@ -22,5 +22,6 @@ export const s = StyleSheet.create({
         width: "100%",
         flexDirection: "row",
         justifyContent:"space-between",
+        flexWrap: "wrap",
     }
 })

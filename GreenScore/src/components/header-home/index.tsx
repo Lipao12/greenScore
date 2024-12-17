@@ -9,7 +9,7 @@ type Props = {
 export function HeaderHome({ title, subtitle }: Props) {
   return (
     <View style={s.container}>
-      <Text style={s.title}>{title}</Text>
+      <Text style={[s.title]}>{title}</Text>
       {subtitle && <Text style={s.subtitle}>{subtitle}</Text>}
     </View>
   );

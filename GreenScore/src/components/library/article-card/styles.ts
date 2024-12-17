@@ -3,6 +3,7 @@ import { StyleSheet } from "react-native";
 
 export const s = StyleSheet.create({
   container: {
+    width: 250,
     flexDirection: "column",
     justifyContent: "flex-start",
     alignItems: "flex-start",
@@ -19,7 +20,6 @@ export const s = StyleSheet.create({
     elevation: 2,
     borderWidth: 1,
     borderColor: colors.gray[200],
-    marginBottom: 16, // Distância entre cards
     minHeight: 100, // Altura mínima para uniformidade
     alignSelf: "stretch", // Expande para ocupar largura disponível
   },
