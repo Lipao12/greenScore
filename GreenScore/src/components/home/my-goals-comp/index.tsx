@@ -56,6 +56,18 @@ export function MyGoalsComp() {
         color?: string;
       }>,
     },
+    {
+      id: 5,
+      title: "Separar lixo reciclável",
+      subtitle: "Faltam 5 dias",
+      color: colors.orange,
+      progress: 90,
+      icon: IconRecycle as React.ComponentType<{
+        width?: number;
+        height?: number;
+        color?: string;
+      }>,
+    },
   ]);
 
   const [showConfetti, setShowConfetti] = useState(false);

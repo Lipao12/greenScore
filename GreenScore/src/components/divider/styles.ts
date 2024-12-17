@@ -7,6 +7,6 @@ export const s = StyleSheet.create({
         width:"auto",
         borderTopWidth:2,
         borderColor: colors.gray[300],
-        marginHorizontal: 16
+        marginHorizontal: 16,
     },
 })

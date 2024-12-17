@@ -13,6 +13,8 @@
     "preset": "jest-expo"
   },
   "dependencies": {
+    "@expo-google-fonts/dancing-script": "^0.2.3",
+    "@expo-google-fonts/fuzzy-bubbles": "^0.2.3",
     "@expo-google-fonts/rubik": "^0.2.3",
     "@expo/vector-icons": "^14.0.2",
     "@react-navigation/native": "^7.0.0",

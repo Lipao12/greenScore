@@ -1,9 +1,10 @@
+import { Divider } from "@/components/divider";
 import { HeaderHome } from "@/components/header-home";
 import { LibraryCard } from "@/components/library/article-card";
 import { colors } from "@/styles/colors";
-import { fontFamily } from "@/styles/font-family";
+import { DancingFont, fontFamily } from "@/styles/font-family";
 import { IconBulb } from "@tabler/icons-react-native";
-import { useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import {
   Animated,
   Easing,
@@ -107,8 +108,8 @@ export default function Library() {
         <Text
           style={{
             textAlign: "center",
-            fontSize: 15,
-            fontFamily: fontFamily.regular,
+            fontSize: 25,
+            fontFamily: DancingFont.semibold,
             marginBottom: 10,
             color: colors.gray[600],
           }}
@@ -134,16 +135,25 @@ export default function Library() {
       {/* Seção de Matérias */}
       {materias.length > 0 && (
         <View style={{ marginBottom: 20 }}>
-          <Text
+          <View
             style={{
-              fontSize: 18,
-              fontFamily: fontFamily.semiBold,
-              marginBottom: 10,
-              color: colors.gray[600],
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "space-between",
             }}
           >
-            Matérias em Destaque
-          </Text>
+            <Text
+              style={{
+                fontSize: 18,
+                fontFamily: fontFamily.semiBold,
+                marginBottom: 10,
+                color: colors.gray[600],
+              }}
+            >
+              Matérias em Destaque
+            </Text>
+            <Divider style={{ marginLeft: 8, marginRight: 0, flexGrow: 1 }} />
+          </View>
           <ScrollView
             horizontal={true}
             showsHorizontalScrollIndicator={false}
@@ -169,16 +179,25 @@ export default function Library() {
       {/* Seção de Artigos */}
       {artigos.length > 0 && (
         <View>
-          <Text
+          <View
             style={{
-              fontSize: 18,
-              fontFamily: fontFamily.semiBold,
-              marginBottom: 10,
-              color: colors.gray[600],
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "space-between",
             }}
           >
-            Artigos Selecionados
-          </Text>
+            <Text
+              style={{
+                fontSize: 18,
+                fontFamily: fontFamily.semiBold,
+                marginBottom: 10,
+                color: colors.gray[600],
+              }}
+            >
+              Artigos Selecionados
+            </Text>
+            <Divider style={{ marginLeft: 8, marginRight: 0, flexGrow: 1 }} />
+          </View>
           <ScrollView
             horizontal={true}
             showsHorizontalScrollIndicator={false}

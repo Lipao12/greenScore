@@ -1,6 +1,15 @@
 import { Loading } from "@/components/loading";
 import { colors } from "@/styles/colors";
 import {
+  DancingScript_400Regular,
+  DancingScript_600SemiBold,
+  DancingScript_700Bold,
+} from "@expo-google-fonts/dancing-script";
+import {
+  FuzzyBubbles_400Regular,
+  FuzzyBubbles_700Bold,
+} from "@expo-google-fonts/fuzzy-bubbles";
+import {
   Rubik_400Regular,
   Rubik_500Medium,
   Rubik_600SemiBold,
@@ -8,6 +17,7 @@ import {
   useFonts,
 } from "@expo-google-fonts/rubik";
 import { Stack } from "expo-router";
+import React from "react";
 //import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 export default function Layout() {
@@ -16,6 +26,11 @@ export default function Layout() {
     Rubik_400Regular,
     Rubik_500Medium,
     Rubik_700Bold,
+    DancingScript_400Regular,
+    DancingScript_600SemiBold,
+    DancingScript_700Bold,
+    FuzzyBubbles_400Regular,
+    FuzzyBubbles_700Bold,
   });
 
   if (!fontsLoaded) {
