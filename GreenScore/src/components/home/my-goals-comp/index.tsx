@@ -1,6 +1,6 @@
 import CircularProgress from "@/components/circular-progress";
 import { colors } from "@/styles/colors";
-import { IconBath, IconBike } from "@tabler/icons-react-native";
+import { IconBath, IconBike, IconRecycle } from "@tabler/icons-react-native";
 import { useState } from "react";
 import { View } from "react-native";
 import { HeaderHome } from "../../header-home";
@@ -32,13 +32,29 @@ export function MyGoalsComp() {
         color?: string;
       }>,
     },
+    {
+      id: 3,
+      title: "Separar lixo reciclável",
+      subtitle: "Faltam 5 dias",
+      color: colors.green,
+      progress: 20,
+      icon: IconRecycle as React.ComponentType<{
+        width?: number;
+        height?: number;
+        color?: string;
+      }>,
+    },
   ]);
 
   return (
     <View style={s.container}>
       <HeaderHome
         title={"Suas metas"}
-        subtitle={"Complete suas metas e ganhe mais EcoPontos!"}
+        subtitle={
+          true
+            ? "Complete suas metas e ganhe mais EcoPontos!"
+            : "Parabéns! 🎉 Você completou todas as metas de hoje e ajudou o planeta! 🌱"
+        }
       />
 
       {/*<GoalProgressCard

@@ -16,16 +16,29 @@ export const colors = {
   },
 
   blue: {
-    soft: "#EAF4FB",  // Azul claro suave
-    light: "#5BA4E5", // Azul mais claro
-    base: "#2271B1",  // Azul base
-    dark: "#0A2E4E",  // Azul escuro
+    soft: "#EAF4FB",  
+    light: "#5BA4E5", 
+    base: "#2271B1",  
+    dark: "#0A2E4E",  
   },
   yellow: {
-    soft: "#FEF9E6",  // Amarelo claro suave
-    light: "#F8D567", // Amarelo mais claro
-    base: "#E3B505",  // Amarelo base
-    dark: "#7A4A00",  // Amarelo escuro
+    soft: "#FEF9E6",  
+    light: "#F8D567", 
+    base: "#E3B505",  
+    dark: "#7A4A00",  
+  },
+
+  purple: {
+    soft: "#EDE7F8",  
+    light: "#9D68FF",  
+    base: "#6B3CC6",  
+    dark: "#3B2265",  
+  },
+  orange: {
+    soft: "#FDF0EB",  
+    light: "#FF9C42",  
+    base: "#FF6A00",  
+    dark: "#B34700",  
   },
 
   red: {

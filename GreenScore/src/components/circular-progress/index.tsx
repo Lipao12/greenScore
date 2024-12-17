@@ -1,7 +1,7 @@
 import { colors } from "@/styles/theme";
 import { IconCheck } from "@tabler/icons-react-native";
 import React, { useEffect, useState } from "react";
-import { Dimensions, Text, TouchableOpacity, View } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 import Animated, {
   useAnimatedProps,
   useSharedValue,
@@ -11,7 +11,6 @@ import Animated, {
 import Svg, { Circle } from "react-native-svg";
 import { s } from "./styles";
 
-const { width } = Dimensions.get("window");
 const AnimatedCircle = Animated.createAnimatedComponent(Circle);
 
 type CircularProgressProps = {
@@ -33,18 +32,14 @@ const CircularProgress = ({
   isTaskDone = false,
   icon: Icon,
 }: CircularProgressProps) => {
-  const radius = 50;
-  const strokeWidth = 10;
+  const radius = 40; // Tamanho reduzido
+  const strokeWidth = 8; // Ajustando a espessura para o tamanho do círculo
   const circumference = 2 * Math.PI * radius;
 
-  // Valor animado de progresso
   const progress = useSharedValue(0);
-
-  //
   const [isChecked, setIsChecked] = useState(false);
 
   useEffect(() => {
-    // Inicia a animação com a porcentagem desejada
     progress.value = withTiming(inicialPercentage, { duration: 1000 });
   }, [inicialPercentage]);
 
@@ -58,8 +53,8 @@ const CircularProgress = ({
       : Math.min(progress.value + 10, 100);
 
     progress.value = withSpring(targetValue, {
-      damping: 10, // Amortecimento (efeito de suavização)
-      stiffness: 80, // Rigidez da animação
+      damping: 10,
+      stiffness: 80,
     });
     setIsChecked(!isChecked);
   };
@@ -67,11 +62,11 @@ const CircularProgress = ({
   return (
     <TouchableOpacity onPress={handlePress} activeOpacity={0.8}>
       <View style={s.container}>
-        <Svg height="120" width="120" viewBox="0 0 120 120">
+        <Svg height="100" width="100" viewBox="0 0 100 100">
           {/* Círculo de Fundo (background) */}
           <Circle
-            cx="60"
-            cy="60"
+            cx="50"
+            cy="50"
             r={radius}
             stroke="#E6E6E6"
             strokeWidth={strokeWidth}
@@ -80,16 +75,16 @@ const CircularProgress = ({
 
           {/* Círculo Interno com cor dinâmica */}
           <Circle
-            cx="60"
-            cy="60"
-            r={radius - strokeWidth / 2} // Menor que o círculo principal
+            cx="50"
+            cy="50"
+            r={radius - strokeWidth / 2}
             fill={color.soft}
           />
 
           {/* Círculo Animado de Progresso */}
           <AnimatedCircle
-            cx="60"
-            cy="60"
+            cx="50"
+            cy="50"
             r={radius}
             stroke={color.base}
             strokeWidth={strokeWidth}
@@ -97,31 +92,42 @@ const CircularProgress = ({
             animatedProps={animatedProps}
             strokeLinecap="round"
             fill="none"
-            transform="rotate(-90 60 60)" // Roda o círculo para começar do topo
+            transform="rotate(-90 50 50)"
           />
         </Svg>
+
         {/* Ícone no centro do círculo */}
         <View style={s.iconContainer}>
-          {Icon && <Icon width={44} height={44} color={color.dark} />}
+          {Icon && <Icon width={32} height={32} color={color.dark} />}
         </View>
 
+        {/* Overlay para o check */}
         {isChecked && (
           <View style={s.overlay}>
-            {/* Borda branca do ícone */}
-            <IconCheck size={80} strokeWidth={6} color="#FFF" />
-            {/* Ícone principal sobreposto */}
+            <IconCheck size={60} strokeWidth={5} color="#FFF" />
             <IconCheck
-              size={80}
-              strokeWidth={3.5}
-              color={isChecked ? colors.green.base : colors.yellow.base}
+              size={60}
+              strokeWidth={3}
+              color={colors.green.base}
               style={{ position: "absolute" }}
             />
           </View>
         )}
       </View>
+
+      {/* Título da task */}
       {title && (
-        <View style={{ marginTop: 10 }}>
-          <Text style={s.title}>{title}</Text>
+        <View style={{ marginTop: 5, alignItems: "center" }}>
+          <Text
+            numberOfLines={3}
+            ellipsizeMode="tail"
+            style={[
+              s.title,
+              { textDecorationLine: isChecked ? "line-through" : "none" },
+            ]}
+          >
+            {title}
+          </Text>
         </View>
       )}
     </TouchableOpacity>

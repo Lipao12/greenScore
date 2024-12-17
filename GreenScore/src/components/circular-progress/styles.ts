@@ -1,4 +1,3 @@
-import { colors, fontFamily } from "@/styles/theme";
 import { StyleSheet } from "react-native";
 
 export const s = StyleSheet.create({
@@ -13,10 +12,9 @@ export const s = StyleSheet.create({
           gap: 4,
         },
         title: {
-          fontSize: 16,
-          fontFamily: fontFamily.regular,
-          color: colors.gray[600],
-          flexWrap: "wrap",
+          fontSize: 12,
+                maxWidth: 90,
+                textAlign: "center",
         },
       iconContainer: {
         position: "absolute",
@@ -29,8 +27,8 @@ export const s = StyleSheet.create({
         position: "absolute",
         alignItems: "center",
         justifyContent: "center",
-        height: 120,
-        width: 120,
+        height: 90, // 72
+        width: 90, // 72
         backgroundColor: "rgba(0,0,0,0.3)",
         borderRadius: 60,
       },
