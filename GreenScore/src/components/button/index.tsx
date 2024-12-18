@@ -1,5 +1,6 @@
 import { colors } from "@/styles/colors";
 import { IconProps as TablerIconProps } from "@tabler/icons-react-native";
+import React from "react";
 import {
   ActivityIndicator,
   Text,
@@ -30,7 +31,7 @@ function Button({ children, style, isLoading = false, ...rest }: ButtonProps) {
 
 function Title({ children, style, ...rest }: TextProps) {
   return (
-    <Text style={[s.title]} {...rest}>
+    <Text style={[s.title, style]} {...rest}>
       {children}
     </Text>
   );
@@ -41,7 +42,7 @@ type IconProps = {
 };
 
 function Icon({ icon: Icon }: IconProps) {
-  return <Icon size={24} color={colors.gray[200]} />;
+  return <Icon size={24} color={colors.gray[200]} strokeWidth={"2"} />;
 }
 
 Button.Title = Title;

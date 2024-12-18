@@ -1,55 +1,98 @@
 import { Button } from "@/components/button";
+import { ColorCard } from "@/components/create-task/color-select";
+import { IconCard } from "@/components/create-task/icon-select";
 import { colors } from "@/styles/colors";
 import {
+  IconAdjustmentsPlus,
   IconArrowLeft,
-  IconBriefcase,
-  IconHome,
-  IconSchool,
+  IconBike,
+  IconBulb,
+  IconDroplet,
+  IconTrash,
 } from "@tabler/icons-react-native"; // Importando ícones
 import { useRouter } from "expo-router";
 import React, { useState } from "react";
 import {
+  Alert,
+  Dimensions,
   ScrollView,
   StyleSheet,
   Text,
   TextInput,
-  TouchableOpacity,
   View,
 } from "react-native";
 
-const colors_ = {
-  green: colors.green.light,
+const colors_: any = {
   blue: colors.blue.light,
+  green: colors.green.light,
   yellow: colors.yellow.light,
   purple: colors.purple.light,
   orange: colors.orange.light,
+  teal: colors.teal.light,
+  pink: colors.pink.light,
+  brown: colors.brown.light,
+  cyan: colors.cyan.light,
 };
 
 const icons = [
-  { label: "Casa", value: "home", IconComponent: IconHome },
-  { label: "Trabalho", value: "briefcase", IconComponent: IconBriefcase },
-  { label: "Escola", value: "school", IconComponent: IconSchool },
+  { label: "Água", value: "water", IconComponent: IconDroplet },
+  { label: "Transporte", value: "bike", IconComponent: IconBike },
+  { label: "Resíduos", value: "school", IconComponent: IconTrash },
+  { label: "Energia", value: "energy", IconComponent: IconBulb },
 ];
+
+const { width } = Dimensions.get("window");
 
 const CreateTaskPage = () => {
   const router = useRouter();
   const [taskName, setTaskName] = useState("");
   const [selectedColor, setSelectedColor] = useState("blue"); // Cor padrão
-  const [selectedIcon, setSelectedIcon] = useState("home"); // Ícone padrão
+  const [selectedIcon, setSelectedIcon] = useState(""); // Ícone padrão
+  const fontSize = width <= 365 ? 12 : 16;
 
   const handleBack = () => {
     router.back();
   };
 
   const handleSaveTask = () => {
+    if (selectedIcon === "" || selectedColor === "") {
+      Alert.alert("Erro ao criar Task", "Faltando selecionar variáveis", [
+        {
+          text: "Voltar",
+          style: "cancel",
+        },
+      ]);
+      return;
+    }
     console.log("Tarefa salva:", taskName, selectedColor, selectedIcon);
   };
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <View style={styles.header}>
-        <Button style={{ width: 40, height: 40 }} onPress={() => router.back()}>
+      <View
+        style={[
+          styles.header,
+          { flexDirection: "row", justifyContent: "space-between" },
+        ]}
+      >
+        <Button style={{ width: 40, height: 40 }} onPress={handleBack}>
           <Button.Icon icon={IconArrowLeft} />
+        </Button>
+
+        {/** botao para tarefa pre definida */}
+        <Button
+          onPress={() => {}}
+          style={{
+            width: "60%",
+            height: 50,
+            paddingHorizontal: 20,
+            paddingVertical: 10,
+          }}
+        >
+          <Button.Icon icon={IconAdjustmentsPlus} />
+          <Button.Title style={{ fontSize }}>
+            Adicionar tarefa Pré definida
+          </Button.Title>
         </Button>
       </View>
 
@@ -57,56 +100,66 @@ const CreateTaskPage = () => {
         <Text style={styles.title}>Criar Tarefa</Text>
 
         {/* Input para o nome da tarefa */}
+        <Text style={{ fontSize: 18, marginBottom: 3 }}>Nome</Text>
         <TextInput
           style={styles.input}
-          placeholder="Digite o nome da tarefa"
+          placeholder=""
           value={taskName}
           onChangeText={setTaskName}
         />
 
-        {/* Seletor de cor */}
-        <Text style={styles.label}>Selecionar Cor:</Text>
-        <View style={styles.colorOptions}>
+        {/* Seleciona ICONE */}
+        <Text style={{ fontSize: 18, marginBottom: 3 }}>Ícone</Text>
+        <View style={{ gap: 10, marginBottom: 20 }}>
+          {icons.map(({ label, value, IconComponent }) => (
+            <IconCard
+              key={value}
+              style_button={selectedIcon === value}
+              style={{
+                backgroundColor: colors_[selectedColor],
+                color: colors_[selectedColor],
+              }}
+              name={label}
+              icon={
+                IconComponent as React.ComponentType<{
+                  size?: number;
+                }>
+              }
+              onPress={() => setSelectedIcon(value)}
+            />
+          ))}
+        </View>
+
+        {/* Seleciona COR */}
+        <Text style={{ fontSize: 18, marginBottom: 3 }}>Cor</Text>
+        <View
+          style={{
+            flexDirection: "row",
+            flexWrap: "wrap",
+            justifyContent: "space-between",
+            gap: 10,
+            marginHorizontal: 15,
+            marginBottom: 20,
+          }}
+        >
           {Object.entries(colors_).map(([key, color]) => (
-            <TouchableOpacity
+            <ColorCard
               key={key}
-              style={[
-                styles.colorButton,
-                {
-                  backgroundColor: color,
-                  borderColor: selectedColor === key ? "#000" : "transparent",
-                },
-              ]}
+              style_button={{
+                backgroundColor: color,
+                borderColor: selectedColor === key ? "#000" : "transparent",
+              }}
               onPress={() => setSelectedColor(key)}
             />
           ))}
         </View>
 
-        {/* Seletor de ícone */}
-        <Text style={styles.label}>Selecionar Ícone:</Text>
-        <View style={styles.iconOptions}>
-          {icons.map(({ label, value, IconComponent }) => (
-            <TouchableOpacity
-              key={value}
-              style={[
-                styles.iconButton,
-                selectedIcon === value && styles.selectedIconButton,
-              ]}
-              onPress={() => setSelectedIcon(value)}
-            >
-              <IconComponent
-                size={40}
-                color={selectedIcon === value ? "#000" : "#aaa"}
-              />
-              <Text>{label}</Text>
-            </TouchableOpacity>
-          ))}
-        </View>
-
         {/* Botão para salvar a tarefa */}
-        <Button onPress={handleSaveTask}>
-          <Button.Title>Salvar Tarefa</Button.Title>
-        </Button>
+        <View style={{ marginTop: 22 }}>
+          <Button onPress={handleSaveTask}>
+            <Button.Title>Salvar Tarefa</Button.Title>
+          </Button>
+        </View>
       </View>
     </ScrollView>
   );
@@ -114,7 +167,6 @@ const CreateTaskPage = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     padding: 20,
     backgroundColor: colors.gray[100],
   },
@@ -135,6 +187,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginBottom: 20,
     paddingHorizontal: 10,
+    borderRadius: 20,
   },
   label: {
     fontSize: 16,

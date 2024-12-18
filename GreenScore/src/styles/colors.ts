@@ -40,6 +40,41 @@ export const colors = {
     base: "#FF6A00",  
     dark: "#B34700",  
   },
+  teal: {
+    soft: "#E8F8F7",
+    light: "#4CD7C0",
+    base: "#008080",
+    dark: "#005953",
+  },
+  
+  pink: {
+    soft: "#FDEDF5",
+    light: "#FF7CA8",
+    base: "#FF1493",
+    dark: "#B10D66",
+  },
+  
+  brown: {
+    soft: "#F5EDE8",
+    light: "#C69C6D",
+    base: "#8B4513",
+    dark: "#5C2C0D",
+  },
+  
+  cyan: {
+    soft: "#E8F9FD",
+    light: "#56D8FF",
+    base: "#00FFFF",
+    dark: "#009A9A",
+  },
+  indigo: {
+    soft: "#EBE8FD",
+    light: "#867DFF",
+    base: "#4B0082",
+    dark: "#2E0057",
+  },
+  
+  
 
   red: {
     light: "#FDEDED",

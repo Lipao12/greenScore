@@ -84,141 +84,142 @@ export default function Library() {
   }, []);
 
   return (
-    <ScrollView
-      contentContainerStyle={{
-        paddingHorizontal: 16,
-        paddingBottom: 16,
-        paddingTop: 40,
-        backgroundColor: colors.gray[100],
-        flex: 1,
-      }}
-      showsVerticalScrollIndicator={false}
-    >
-      {/** HEADER DA PÁGINA */}
-      <View
-        style={{
-          flex: 1,
-          justifyContent: "center",
-          alignItems: "center",
+    <View style={{ flex: 1, backgroundColor: colors.gray[100] }}>
+      <ScrollView
+        contentContainerStyle={{
+          paddingHorizontal: 16,
+          paddingBottom: 16,
+          paddingTop: 40,
+          backgroundColor: colors.gray[100],
         }}
+        showsVerticalScrollIndicator={false}
       >
-        <Animated.View style={{ opacity: opacityAnim }}>
-          <IconBulb size={70} color={colors.yellow.light} />
-        </Animated.View>
-        <Text
+        {/** HEADER DA PÁGINA */}
+        <View
           style={{
-            textAlign: "center",
-            fontSize: 25,
-            fontFamily: DancingFont.semibold,
-            marginBottom: 10,
-            color: colors.gray[600],
+            justifyContent: "center",
+            alignItems: "center",
+            marginBottom: 25,
           }}
         >
-          Plante hoje ideias que florescerão em um futuro sustentável
+          <Animated.View style={{ opacity: opacityAnim }}>
+            <IconBulb size={70} color={colors.yellow.light} />
+          </Animated.View>
+          <Text
+            style={{
+              textAlign: "center",
+              fontSize: 25,
+              fontFamily: DancingFont.semibold,
+              marginBottom: 10,
+              color: colors.gray[600],
+            }}
+          >
+            Plante hoje ideias que florescerão em um futuro sustentável
+          </Text>
+        </View>
+        <HeaderHome title={"Biblioteca"} />
+
+        <Text
+          style={{
+            fontSize: 15,
+            fontFamily: fontFamily.regular,
+            marginBottom: 20,
+            color: colors.gray[600],
+            paddingHorizontal: 10,
+          }}
+        >
+          Cultivar uma mente sustentável é como plantar sementes: o cuidado
+          diário cria raízes fortes e frutos duradouros.
         </Text>
-      </View>
-      <HeaderHome title={"Biblioteca"} />
 
-      <Text
-        style={{
-          fontSize: 15,
-          fontFamily: fontFamily.regular,
-          marginBottom: 20,
-          color: colors.gray[600],
-          paddingHorizontal: 10,
-        }}
-      >
-        Cultivar uma mente sustentável é como plantar sementes: o cuidado diário
-        cria raízes fortes e frutos duradouros.
-      </Text>
-
-      {/* Seção de Matérias */}
-      {materias.length > 0 && (
-        <View style={{ marginBottom: 20 }}>
-          <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "space-between",
-            }}
-          >
-            <Text
+        {/* Seção de Matérias */}
+        {materias.length > 0 && (
+          <View style={{ marginBottom: 20 }}>
+            <View
               style={{
-                fontSize: 18,
-                fontFamily: fontFamily.semiBold,
-                marginBottom: 10,
-                color: colors.gray[600],
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "space-between",
               }}
             >
-              Matérias em Destaque
-            </Text>
-            <Divider style={{ marginLeft: 8, marginRight: 0, flexGrow: 1 }} />
-          </View>
-          <ScrollView
-            horizontal={true}
-            showsHorizontalScrollIndicator={false}
-            style={{
-              paddingVertical: 10,
-            }}
-            contentContainerStyle={{
-              gap: 16,
-            }}
-          >
-            {materias.map((materia, index) => (
-              <LibraryCard
-                key={index}
-                title={materia.title}
-                subtitle={materia.subtitle}
-                onPress={() => openUrl(materia.url)}
-              />
-            ))}
-          </ScrollView>
-        </View>
-      )}
-
-      {/* Seção de Artigos */}
-      {artigos.length > 0 && (
-        <View>
-          <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "space-between",
-            }}
-          >
-            <Text
+              <Text
+                style={{
+                  fontSize: 18,
+                  fontFamily: fontFamily.semiBold,
+                  marginBottom: 10,
+                  color: colors.gray[600],
+                }}
+              >
+                Matérias em Destaque
+              </Text>
+              <Divider style={{ marginLeft: 8, marginRight: 0, flexGrow: 1 }} />
+            </View>
+            <ScrollView
+              horizontal={true}
+              showsHorizontalScrollIndicator={false}
               style={{
-                fontSize: 18,
-                fontFamily: fontFamily.semiBold,
-                marginBottom: 10,
-                color: colors.gray[600],
+                paddingVertical: 10,
+              }}
+              contentContainerStyle={{
+                gap: 16,
               }}
             >
-              Artigos Selecionados
-            </Text>
-            <Divider style={{ marginLeft: 8, marginRight: 0, flexGrow: 1 }} />
+              {materias.map((materia, index) => (
+                <LibraryCard
+                  key={index}
+                  title={materia.title}
+                  subtitle={materia.subtitle}
+                  onPress={() => openUrl(materia.url)}
+                />
+              ))}
+            </ScrollView>
           </View>
-          <ScrollView
-            horizontal={true}
-            showsHorizontalScrollIndicator={false}
-            style={{
-              paddingVertical: 10,
-            }}
-            contentContainerStyle={{
-              gap: 16,
-            }}
-          >
-            {artigos.map((materia, index) => (
-              <LibraryCard
-                key={index}
-                title={materia.title}
-                subtitle={materia.subtitle}
-                onPress={() => openUrl(materia.url)}
-              />
-            ))}
-          </ScrollView>
-        </View>
-      )}
-    </ScrollView>
+        )}
+
+        {/* Seção de Artigos */}
+        {artigos.length > 0 && (
+          <View>
+            <View
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "space-between",
+              }}
+            >
+              <Text
+                style={{
+                  fontSize: 18,
+                  fontFamily: fontFamily.semiBold,
+                  marginBottom: 10,
+                  color: colors.gray[600],
+                }}
+              >
+                Artigos Selecionados
+              </Text>
+              <Divider style={{ marginLeft: 8, marginRight: 0, flexGrow: 1 }} />
+            </View>
+            <ScrollView
+              horizontal={true}
+              showsHorizontalScrollIndicator={false}
+              style={{
+                paddingVertical: 10,
+              }}
+              contentContainerStyle={{
+                gap: 16,
+              }}
+            >
+              {artigos.map((materia, index) => (
+                <LibraryCard
+                  key={index}
+                  title={materia.title}
+                  subtitle={materia.subtitle}
+                  onPress={() => openUrl(materia.url)}
+                />
+              ))}
+            </ScrollView>
+          </View>
+        )}
+      </ScrollView>
+    </View>
   );
 }
