@@ -48,7 +48,6 @@ const CreateTaskPage = () => {
   const [taskName, setTaskName] = useState("");
   const [selectedColor, setSelectedColor] = useState("blue"); // Cor padrão
   const [selectedIcon, setSelectedIcon] = useState(""); // Ícone padrão
-  const fontSize = width <= 365 ? 12 : 16;
 
   const handleBack = () => {
     router.back();
@@ -90,7 +89,7 @@ const CreateTaskPage = () => {
           }}
         >
           <Button.Icon icon={IconAdjustmentsPlus} />
-          <Button.Title style={{ fontSize }}>
+          <Button.Title style={{ fontSize: 12 }}>
             Adicionar tarefa Pré definida
           </Button.Title>
         </Button>
@@ -120,11 +119,7 @@ const CreateTaskPage = () => {
                 color: colors_[selectedColor],
               }}
               name={label}
-              icon={
-                IconComponent as React.ComponentType<{
-                  size?: number;
-                }>
-              }
+              icon={IconComponent}
               onPress={() => setSelectedIcon(value)}
             />
           ))}
@@ -134,24 +129,32 @@ const CreateTaskPage = () => {
         <Text style={{ fontSize: 18, marginBottom: 3 }}>Cor</Text>
         <View
           style={{
-            flexDirection: "row",
-            flexWrap: "wrap",
-            justifyContent: "space-between",
-            gap: 10,
-            marginHorizontal: 15,
-            marginBottom: 20,
+            alignItems: "center",
+            justifyContent: "center",
           }}
         >
-          {Object.entries(colors_).map(([key, color]) => (
-            <ColorCard
-              key={key}
-              style_button={{
-                backgroundColor: color,
-                borderColor: selectedColor === key ? "#000" : "transparent",
-              }}
-              onPress={() => setSelectedColor(key)}
-            />
-          ))}
+          <View
+            style={{
+              flexDirection: "row",
+              flexWrap: "wrap",
+              justifyContent: "space-between",
+              gap: 10,
+              marginHorizontal: 15,
+              marginBottom: 20,
+              maxWidth: 300,
+            }}
+          >
+            {Object.entries(colors_).map(([key, color]) => (
+              <ColorCard
+                key={key}
+                style_button={{
+                  backgroundColor: color,
+                  borderColor: selectedColor === key ? "#000" : "transparent",
+                }}
+                onPress={() => setSelectedColor(key)}
+              />
+            ))}
+          </View>
         </View>
 
         {/* Botão para salvar a tarefa */}

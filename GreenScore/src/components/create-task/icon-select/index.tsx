@@ -1,3 +1,5 @@
+import { colors } from "@/styles/colors";
+import { IconProps as TablerIconProps } from "@tabler/icons-react-native";
 import React from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import { s } from "./styles";
@@ -5,9 +7,9 @@ import { s } from "./styles";
 interface Props {
   name: string;
   style_button: boolean;
-  style: object;
+  style: { backgroundColor: string; color: string };
   onPress: () => void;
-  icon: React.ComponentType<{ size?: number }>;
+  icon: React.ComponentType<TablerIconProps>;
 }
 
 export const IconCard = ({
@@ -28,7 +30,7 @@ export const IconCard = ({
       onPress={onPress}
     >
       <View style={s.iconContainer}>
-        <Icon size={37} />
+        <Icon size={37} color={style_button ? style.color : colors.gray[600]} />
       </View>
       <Text style={s.text}>{name}</Text>
     </TouchableOpacity>

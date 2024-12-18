@@ -63,7 +63,7 @@ export default function Goals() {
           }}
         >
           <Button.Title
-            style={{ fontSize: 10, fontFamily: fontFamily.regular }}
+            style={{ fontSize: 14, fontFamily: fontFamily.regular }}
           >
             + Adicionar Tarefa
           </Button.Title>
