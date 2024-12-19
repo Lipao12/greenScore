@@ -67,104 +67,106 @@ const CreateTaskPage = () => {
   };
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <View
-        style={[
-          styles.header,
-          { flexDirection: "row", justifyContent: "space-between" },
-        ]}
-      >
-        <Button style={{ width: 40, height: 40 }} onPress={handleBack}>
-          <Button.Icon icon={IconArrowLeft} />
-        </Button>
-
-        {/** botao para tarefa pre definida */}
-        <Button
-          onPress={() => {}}
-          style={{
-            width: "60%",
-            height: 50,
-            paddingHorizontal: 20,
-            paddingVertical: 10,
-          }}
-        >
-          <Button.Icon icon={IconAdjustmentsPlus} />
-          <Button.Title style={{ fontSize: 12 }}>
-            Adicionar tarefa Pré definida
-          </Button.Title>
-        </Button>
-      </View>
-
-      <View style={styles.formContainer}>
-        <Text style={styles.title}>Criar Tarefa</Text>
-
-        {/* Input para o nome da tarefa */}
-        <Text style={{ fontSize: 18, marginBottom: 3 }}>Nome</Text>
-        <TextInput
-          style={styles.input}
-          placeholder=""
-          value={taskName}
-          onChangeText={setTaskName}
-        />
-
-        {/* Seleciona ICONE */}
-        <Text style={{ fontSize: 18, marginBottom: 3 }}>Ícone</Text>
-        <View style={{ gap: 10, marginBottom: 20 }}>
-          {icons.map(({ label, value, IconComponent }) => (
-            <IconCard
-              key={value}
-              style_button={selectedIcon === value}
-              style={{
-                backgroundColor: colors_[selectedColor],
-                color: colors_[selectedColor],
-              }}
-              name={label}
-              icon={IconComponent}
-              onPress={() => setSelectedIcon(value)}
-            />
-          ))}
-        </View>
-
-        {/* Seleciona COR */}
-        <Text style={{ fontSize: 18, marginBottom: 3 }}>Cor</Text>
+    <View style={{ flex: 1, backgroundColor: colors.gray[100] }}>
+      <ScrollView contentContainerStyle={styles.container}>
         <View
-          style={{
-            alignItems: "center",
-            justifyContent: "center",
-          }}
+          style={[
+            styles.header,
+            { flexDirection: "row", justifyContent: "space-between" },
+          ]}
         >
-          <View
+          <Button style={{ width: 40, height: 40 }} onPress={handleBack}>
+            <Button.Icon icon={IconArrowLeft} />
+          </Button>
+
+          {/** botao para tarefa pre definida */}
+          <Button
+            onPress={() => router.push("/create_task/predefined-task")}
             style={{
-              flexDirection: "row",
-              flexWrap: "wrap",
-              justifyContent: "space-between",
-              gap: 10,
-              marginHorizontal: 15,
-              marginBottom: 20,
-              maxWidth: 300,
+              width: "60%",
+              height: 50,
+              paddingHorizontal: 20,
+              paddingVertical: 10,
             }}
           >
-            {Object.entries(colors_).map(([key, color]) => (
-              <ColorCard
-                key={key}
-                style_button={{
-                  backgroundColor: color,
-                  borderColor: selectedColor === key ? "#000" : "transparent",
+            <Button.Icon icon={IconAdjustmentsPlus} />
+            <Button.Title style={{ fontSize: 12 }}>
+              Adicionar tarefa Pré definida
+            </Button.Title>
+          </Button>
+        </View>
+
+        <View style={styles.formContainer}>
+          <Text style={styles.title}>Criar Tarefa</Text>
+
+          {/* Input para o nome da tarefa */}
+          <Text style={{ fontSize: 18, marginBottom: 3 }}>Nome</Text>
+          <TextInput
+            style={styles.input}
+            placeholder=""
+            value={taskName}
+            onChangeText={setTaskName}
+          />
+
+          {/* Seleciona ICONE */}
+          <Text style={{ fontSize: 18, marginBottom: 3 }}>Ícone</Text>
+          <View style={{ gap: 10, marginBottom: 20 }}>
+            {icons.map(({ label, value, IconComponent }) => (
+              <IconCard
+                key={value}
+                style_button={selectedIcon === value}
+                style={{
+                  backgroundColor: colors_[selectedColor],
+                  color: colors_[selectedColor],
                 }}
-                onPress={() => setSelectedColor(key)}
+                name={label}
+                icon={IconComponent}
+                onPress={() => setSelectedIcon(value)}
               />
             ))}
           </View>
-        </View>
 
-        {/* Botão para salvar a tarefa */}
-        <View style={{ marginTop: 22 }}>
-          <Button onPress={handleSaveTask}>
-            <Button.Title>Salvar Tarefa</Button.Title>
-          </Button>
+          {/* Seleciona COR */}
+          <Text style={{ fontSize: 18, marginBottom: 3 }}>Cor</Text>
+          <View
+            style={{
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <View
+              style={{
+                flexDirection: "row",
+                flexWrap: "wrap",
+                justifyContent: "space-between",
+                gap: 10,
+                marginHorizontal: 15,
+                marginBottom: 20,
+                maxWidth: 300,
+              }}
+            >
+              {Object.entries(colors_).map(([key, color]) => (
+                <ColorCard
+                  key={key}
+                  style_button={{
+                    backgroundColor: color,
+                    borderColor: selectedColor === key ? "#000" : "transparent",
+                  }}
+                  onPress={() => setSelectedColor(key)}
+                />
+              ))}
+            </View>
+          </View>
+
+          {/* Botão para salvar a tarefa */}
+          <View style={{ marginTop: 22 }}>
+            <Button onPress={handleSaveTask}>
+              <Button.Title>Salvar Tarefa</Button.Title>
+            </Button>
+          </View>
         </View>
-      </View>
-    </ScrollView>
+      </ScrollView>
+    </View>
   );
 };
 
