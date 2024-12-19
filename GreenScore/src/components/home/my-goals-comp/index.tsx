@@ -1,7 +1,7 @@
 import CircularProgress from "@/components/circular-progress";
 import { colors } from "@/styles/colors";
 import { IconBath, IconBike, IconRecycle } from "@tabler/icons-react-native";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { View } from "react-native";
 import { HeaderHome } from "../../header-home";
 import { s } from "./styles";
@@ -56,33 +56,7 @@ export function MyGoalsComp() {
         color?: string;
       }>,
     },
-    {
-      id: 5,
-      title: "Separar lixo reciclável",
-      subtitle: "Faltam 5 dias",
-      color: colors.orange,
-      progress: 90,
-      icon: IconRecycle as React.ComponentType<{
-        width?: number;
-        height?: number;
-        color?: string;
-      }>,
-    },
   ]);
-
-  const [showConfetti, setShowConfetti] = useState(false);
-  useEffect(() => {
-    const handleConfetti = () => {
-      tasks.forEach((task) => {
-        if (task.progress === 100) {
-          setShowConfetti(true);
-          setTimeout(() => setShowConfetti(false), 2000); // Hide confetti after 2 seconds
-        }
-      });
-    };
-
-    handleConfetti();
-  }, [tasks]);
 
   return (
     <View style={s.container}>
