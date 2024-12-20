@@ -42,7 +42,7 @@ export default function Layout() {
     <Stack
       screenOptions={{
         headerShown: false,
-        contentStyle: { backgroundColor: colors.red.base },
+        contentStyle: { backgroundColor: colors.gray[100] },
       }}
     >
       <Stack.Screen name="(tabs)" />
