@@ -1,14 +1,11 @@
 import { Button } from "@/components/button";
+import { predefinedTasks } from "@/infos/predefined-task";
+import { useTasks } from "@/server/task-maneger";
 import { colors } from "@/styles/colors";
-import {
-  IconArrowLeft,
-  IconBike,
-  IconBulb,
-  IconDroplet,
-  IconTrash,
-} from "@tabler/icons-react-native";
+import { Task } from "@/types/types";
+import { IconArrowLeft } from "@tabler/icons-react-native";
 import { useRouter } from "expo-router";
-import React from "react";
+import React, { useState } from "react";
 import {
   Alert,
   FlatList,
@@ -18,32 +15,13 @@ import {
   View,
 } from "react-native";
 
-const predefinedTasks = [
-  {
-    id: 1,
-    name: "Reduzir consumo de água",
-    icon: IconDroplet,
-    color: colors.blue.light,
-  },
-  { id: 2, name: "Usar bicicleta", icon: IconBike, color: colors.green.light },
-  {
-    id: 3,
-    name: "Reciclar resíduos",
-    icon: IconTrash,
-    color: colors.orange.light,
-  },
-  {
-    id: 4,
-    name: "Economizar energia",
-    icon: IconBulb,
-    color: colors.yellow.light,
-  },
-];
-
 export default function PredefinedTasks() {
   const router = useRouter();
+  const { createTask } = useTasks();
+  const [selectedTask, setSelectedTask] = useState<Task | null>(null);
 
-  const handleAddTask = (task: any) => {
+  const handleAddTask = (task: Task) => {
+    setSelectedTask(task);
     Alert.alert(
       "Tá dentro?",
       `Você quer mesmo adicionar "${task.name}" às suas tarefas? 🤔`,
@@ -55,13 +33,20 @@ export default function PredefinedTasks() {
         },
         {
           text: "Bora! 🚀",
-          onPress: () => {
-            console.log("Tarefa adicionada:", task);
-            router.replace("/home");
-          },
+          onPress: () => handleCreateTask(task),
         },
       ]
     );
+  };
+  const handleCreateTask = (task: Task) => {
+    if (!task || !task.name) {
+      Alert.alert("Erro", "Por favor, selecione uma tarefa válida.");
+      return;
+    }
+
+    createTask(task);
+    console.log("Tarefa adicionada:", task);
+    router.replace("/home");
   };
 
   const handleBack = () => {
@@ -81,7 +66,7 @@ export default function PredefinedTasks() {
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
           <TouchableOpacity
-            style={[styles.taskCard, { backgroundColor: item.color }]}
+            style={[styles.taskCard, { backgroundColor: item.color.light }]}
             onPress={() => handleAddTask(item)}
           >
             <item.icon size={24} color="white" />

@@ -1,5 +1,8 @@
 import { colors } from "@/styles/theme";
-import { IconCheck } from "@tabler/icons-react-native";
+import {
+  IconCheck,
+  IconProps as TablerIconProps,
+} from "@tabler/icons-react-native";
 import React, { useEffect, useState } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import Animated, {
@@ -18,11 +21,7 @@ type CircularProgressProps = {
   color: any;
   percentage: number;
   isTaskDone?: boolean;
-  icon?: React.ComponentType<{
-    width?: number;
-    height?: number;
-    color?: string;
-  }>;
+  icon?: React.ComponentType<TablerIconProps>;
 };
 
 const CircularProgress = ({

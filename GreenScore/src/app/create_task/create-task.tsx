@@ -1,7 +1,9 @@
 import { Button } from "@/components/button";
 import { ColorCard } from "@/components/create-task/color-select";
 import { IconCard } from "@/components/create-task/icon-select";
+import { useTasks } from "@/server/task-maneger";
 import { colors } from "@/styles/colors";
+import { Task } from "@/types/types";
 import {
   IconAdjustmentsPlus,
   IconArrowLeft,
@@ -23,15 +25,15 @@ import {
 } from "react-native";
 
 const colors_: any = {
-  blue: colors.blue.light,
-  green: colors.green.light,
-  yellow: colors.yellow.light,
-  purple: colors.purple.light,
-  orange: colors.orange.light,
-  teal: colors.teal.light,
-  pink: colors.pink.light,
-  brown: colors.brown.light,
-  cyan: colors.cyan.light,
+  blue: colors.blue,
+  green: colors.green,
+  yellow: colors.yellow,
+  purple: colors.purple,
+  orange: colors.orange,
+  teal: colors.teal,
+  pink: colors.pink,
+  brown: colors.brown,
+  cyan: colors.cyan,
 };
 
 const icons = [
@@ -45,6 +47,7 @@ const { width } = Dimensions.get("window");
 
 const CreateTaskPage = () => {
   const router = useRouter();
+  const { createTask } = useTasks();
   const [taskName, setTaskName] = useState("");
   const [selectedColor, setSelectedColor] = useState("blue"); // Cor padrão
   const [selectedIcon, setSelectedIcon] = useState(""); // Ícone padrão
@@ -54,7 +57,7 @@ const CreateTaskPage = () => {
   };
 
   const handleSaveTask = () => {
-    if (selectedIcon === "" || selectedColor === "") {
+    if (!taskName || selectedIcon === "" || selectedColor === "") {
       Alert.alert("Erro ao criar Task", "Faltando selecionar variáveis", [
         {
           text: "Voltar",
@@ -63,7 +66,29 @@ const CreateTaskPage = () => {
       ]);
       return;
     }
-    console.log("Tarefa salva:", taskName, selectedColor, selectedIcon);
+    const selectedIconComponent = icons.find(
+      (icon) => icon.value === selectedIcon
+    )?.IconComponent;
+    if (!selectedIconComponent) {
+      Alert.alert("Erro", "Ícone não encontrado");
+      return;
+    }
+
+    const newTask: Task = {
+      id: Date.now(), // Gera um ID único
+      name: taskName,
+      color: colors_[selectedColor], // Cor dinâmica
+      progress: 0, // Inicialmente, o progresso é 0
+      icon: selectedIconComponent, // Ícone dinâmico
+    };
+
+    createTask(newTask);
+
+    setTaskName("");
+    setSelectedColor("blue");
+    setSelectedIcon("");
+
+    router.replace("/home");
   };
 
   return (
@@ -116,8 +141,8 @@ const CreateTaskPage = () => {
                 key={value}
                 style_button={selectedIcon === value}
                 style={{
-                  backgroundColor: colors_[selectedColor],
-                  color: colors_[selectedColor],
+                  backgroundColor: colors_[selectedColor].light,
+                  color: colors_[selectedColor].light,
                 }}
                 name={label}
                 icon={IconComponent}
@@ -149,7 +174,7 @@ const CreateTaskPage = () => {
                 <ColorCard
                   key={key}
                   style_button={{
-                    backgroundColor: color,
+                    backgroundColor: color.light,
                     borderColor: selectedColor === key ? "#000" : "transparent",
                   }}
                   onPress={() => setSelectedColor(key)}

@@ -1,4 +1,5 @@
 import { Loading } from "@/components/loading";
+import { GoalsProvider } from "@/server/task-maneger";
 import { colors } from "@/styles/colors";
 import {
   DancingScript_400Regular,
@@ -39,14 +40,16 @@ export default function Layout() {
 
   return (
     //<GestureHandlerRootView style={{ flex: 1 }}>
-    <Stack
-      screenOptions={{
-        headerShown: false,
-        contentStyle: { backgroundColor: colors.gray[100] },
-      }}
-    >
-      <Stack.Screen name="(tabs)" />
-    </Stack>
+    <GoalsProvider>
+      <Stack
+        screenOptions={{
+          headerShown: false,
+          contentStyle: { backgroundColor: colors.gray[100] },
+        }}
+      >
+        <Stack.Screen name="(tabs)" />
+      </Stack>
+    </GoalsProvider>
     //</GestureHandlerRootView>
   );
 }

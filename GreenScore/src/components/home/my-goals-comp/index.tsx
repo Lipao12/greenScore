@@ -1,4 +1,5 @@
 import CircularProgress from "@/components/circular-progress";
+import { useTasks } from "@/server/task-maneger";
 import { colors } from "@/styles/colors";
 import { IconBath, IconBike, IconRecycle } from "@tabler/icons-react-native";
 import React, { useState } from "react";
@@ -7,18 +8,15 @@ import { HeaderHome } from "../../header-home";
 import { s } from "./styles";
 
 export function MyGoalsComp() {
-  const [tasks, setTasks] = useState([
+  const { tasks } = useTasks();
+  const [tasks_, setTasks] = useState([
     {
       id: 1,
       title: "Reduzir banho para 7 min",
       subtitle: "Faltam 2 dias",
       color: colors.yellow,
       progress: 80,
-      icon: IconBath as React.ComponentType<{
-        width?: number;
-        height?: number;
-        color?: string;
-      }>,
+      icon: IconBath,
     },
     {
       id: 2,
@@ -26,11 +24,7 @@ export function MyGoalsComp() {
       subtitle: "Faltam 3 dias",
       color: colors.blue,
       progress: 50,
-      icon: IconBike as React.ComponentType<{
-        width?: number;
-        height?: number;
-        color?: string;
-      }>,
+      icon: IconBike,
     },
     {
       id: 3,
@@ -38,11 +32,7 @@ export function MyGoalsComp() {
       subtitle: "Faltam 5 dias",
       color: colors.green,
       progress: 20,
-      icon: IconRecycle as React.ComponentType<{
-        width?: number;
-        height?: number;
-        color?: string;
-      }>,
+      icon: IconRecycle,
     },
     {
       id: 4,
@@ -50,11 +40,7 @@ export function MyGoalsComp() {
       subtitle: "Faltam 5 dias",
       color: colors.green,
       progress: 90,
-      icon: IconRecycle as React.ComponentType<{
-        width?: number;
-        height?: number;
-        color?: string;
-      }>,
+      icon: IconRecycle,
     },
   ]);
 
@@ -80,12 +66,26 @@ export function MyGoalsComp() {
         {tasks.map((task) => (
           <CircularProgress
             key={task.id}
-            title={task.title}
+            title={task.name}
             percentage={task.progress}
             color={task.color}
             icon={task.icon}
           />
         ))}
+        {/*
+          <FlatList
+            data={tasks}
+            renderItem={({ item, index }) => (
+              <CircularProgress
+                key={item.id}
+                title={item.name}
+                percentage={item.progress}
+                color={item.color}
+                icon={item.icon}
+              />
+            )}
+          />
+        */}
       </View>
     </View>
   );

@@ -21,7 +21,7 @@ export const s = StyleSheet.create({
     cardContainer:{
         width: "100%",
         flexDirection: "row",
-        justifyContent:"space-between",
+        justifyContent:"flex-start",
         flexWrap: "wrap",
     }
 })
