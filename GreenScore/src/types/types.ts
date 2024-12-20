@@ -10,7 +10,9 @@ export interface Color {
 export interface Task {
     id: number,
     name: string,
+    description: string,
     color: Color,
     progress: number,
+    maxProgress: number,
     icon: React.ComponentType<TablerIconProps>,
 }

@@ -2,15 +2,18 @@ import { Button } from "@/components/button";
 import { Divider } from "@/components/divider";
 import { HeaderHome } from "@/components/header-home";
 import { GoalsCard } from "@/components/my-goals/goals-card";
+import { useTasks } from "@/server/task-maneger";
 import { colors } from "@/styles/colors";
 import { fontFamily } from "@/styles/font-family";
 import { IconBike } from "@tabler/icons-react-native";
 import { useRouter } from "expo-router";
 import React from "react";
-import { ScrollView, View } from "react-native";
+import { Alert, FlatList, ScrollView, View } from "react-native";
 
 export default function Goals() {
   const router = useRouter();
+  const { tasks, deleteTask } = useTasks();
+
   return (
     <ScrollView
       contentContainerStyle={{
@@ -25,29 +28,40 @@ export default function Goals() {
         title="Minhas Metas Pessoais"
         subtitle="Transforme pequenas ações diárias em grandes mudanças. Cada meta alcançada é um passo para hábitos mais sustentáveis, melhorando sua vida e o planeta. Seja protagonista da mudança!"
       />
-      <GoalsCard
-        title="Use transporte público ou bicicleta 3 vezes por semana."
-        subtitle="Ao término será economizado 30kg de CO₂"
-        icon={
-          IconBike as React.ComponentType<{
-            width?: number;
-            height?: number;
-            color?: string;
-          }>
-        }
-        onDelete={() => {}}
-      />
-      <GoalsCard
-        title="Use transporte público ou bicicleta 3 vezes por semana."
-        subtitle="Ao término será economizado 30kg de CO₂"
-        icon={
-          IconBike as React.ComponentType<{
-            width?: number;
-            height?: number;
-            color?: string;
-          }>
-        }
-        onDelete={() => {}}
+      <FlatList
+        data={tasks}
+        renderItem={({ item, index }) => (
+          <GoalsCard
+            key={item.id}
+            title={item.name}
+            subtitle={item.description}
+            color={item.color}
+            icon={item.icon}
+            onDelete={() => {
+              Alert.alert(
+                "⚠️⚠️ Perigo",
+                `Você clicou para deletar "${item.name}", está certo isso? 🤔`,
+                [
+                  {
+                    text: "Na real, não",
+                    onPress: () => console.log("Cancel Pressed"),
+                    style: "cancel",
+                  },
+                  {
+                    text: "Pode deletar!",
+                    onPress: () => {
+                      try {
+                        deleteTask(item.id);
+                      } catch (err) {
+                        console.log(err);
+                      }
+                    },
+                  },
+                ]
+              );
+            }}
+          />
+        )}
       />
       <View
         style={{
@@ -80,25 +94,13 @@ export default function Goals() {
       <GoalsCard
         title="Use transporte público ou bicicleta 3 vezes por semana."
         subtitle="Ao término será economizado 30kg de CO₂"
-        icon={
-          IconBike as React.ComponentType<{
-            width?: number;
-            height?: number;
-            color?: string;
-          }>
-        }
+        icon={IconBike}
         onDelete={() => {}}
       />
       <GoalsCard
         title="Use transporte público ou bicicleta 3 vezes por semana."
         subtitle="Ao término será economizado 30kg de CO₂"
-        icon={
-          IconBike as React.ComponentType<{
-            width?: number;
-            height?: number;
-            color?: string;
-          }>
-        }
+        icon={IconBike}
         onDelete={() => {}}
       />
       <Button

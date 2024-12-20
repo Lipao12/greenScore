@@ -70,6 +70,7 @@ export function MyGoalsComp() {
             percentage={task.progress}
             color={task.color}
             icon={task.icon}
+            maxProgress={task.maxProgress}
           />
         ))}
         {/*

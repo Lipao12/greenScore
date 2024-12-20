@@ -1,5 +1,6 @@
 import { colors } from "@/styles/colors";
-import { IconX } from "@tabler/icons-react-native"; // Importa um ícone de "X"
+import { Color } from "@/types/types";
+import { IconProps, IconX } from "@tabler/icons-react-native"; // Importa um ícone de "X"
 import React from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import { s } from "./styles";
@@ -7,15 +8,18 @@ import { s } from "./styles";
 type Props = {
   title: string;
   subtitle: string;
-  icon?: React.ComponentType<{
-    width?: number;
-    height?: number;
-    color?: string;
-  }>;
+  icon?: React.ComponentType<IconProps>;
+  color?: Color;
   onDelete: () => void; // Callback para apagar o card
 };
 
-export function GoalsCard({ title, subtitle, icon: Icon, onDelete }: Props) {
+export function GoalsCard({
+  title,
+  subtitle,
+  color,
+  icon: Icon,
+  onDelete,
+}: Props) {
   return (
     <View style={s.container}>
       <TouchableOpacity style={s.closeButton} onPress={onDelete}>
@@ -24,7 +28,13 @@ export function GoalsCard({ title, subtitle, icon: Icon, onDelete }: Props) {
 
       {/* Conteúdo principal */}
       <View style={{ flexDirection: "row", gap: 16, alignItems: "center" }}>
-        {Icon && <Icon width={37} height={37} color={colors.green.base} />}
+        {Icon && (
+          <Icon
+            width={37}
+            height={37}
+            color={color ? color.base : colors.green.base}
+          />
+        )}
         <View style={s.textContainer}>
           <Text style={s.title}>{title}</Text>
           {subtitle && <Text style={s.subtitle}>{subtitle}</Text>}

@@ -18,10 +18,18 @@ import {
 export default function PredefinedTasks() {
   const router = useRouter();
   const { createTask } = useTasks();
-  const [selectedTask, setSelectedTask] = useState<Task | null>(null);
+
+  const [selectedType, setSelectedType] = useState<string | null>(null);
+
+  const taskTypes = Array.from(
+    new Set(predefinedTasks.map((task) => task.type))
+  );
+
+  const handleSelectType = (type: string) => {
+    setSelectedType(type);
+  };
 
   const handleAddTask = (task: Task) => {
-    setSelectedTask(task);
     Alert.alert(
       "Tá dentro?",
       `Você quer mesmo adicionar "${task.name}" às suas tarefas? 🤔`,
@@ -38,6 +46,7 @@ export default function PredefinedTasks() {
       ]
     );
   };
+
   const handleCreateTask = (task: Task) => {
     if (!task || !task.name) {
       Alert.alert("Erro", "Por favor, selecione uma tarefa válida.");
@@ -45,12 +54,15 @@ export default function PredefinedTasks() {
     }
 
     createTask(task);
-    console.log("Tarefa adicionada:", task);
     router.replace("/home");
   };
 
   const handleBack = () => {
-    router.back();
+    if (selectedType) {
+      setSelectedType(null);
+    } else {
+      router.back();
+    }
   };
 
   return (
@@ -60,20 +72,41 @@ export default function PredefinedTasks() {
           <Button.Icon icon={IconArrowLeft} />
         </Button>
       </View>
-      <Text style={styles.title}>Tarefas Pré-definidas</Text>
-      <FlatList // mais interessante que utilzar o map????
-        data={predefinedTasks}
-        keyExtractor={(item) => item.id.toString()}
-        renderItem={({ item }) => (
-          <TouchableOpacity
-            style={[styles.taskCard, { backgroundColor: item.color.light }]}
-            onPress={() => handleAddTask(item)}
-          >
-            <item.icon size={24} color="white" />
-            <Text style={styles.taskName}>{item.name}</Text>
-          </TouchableOpacity>
-        )}
-      />
+
+      {!selectedType ? (
+        <>
+          <Text style={styles.title}>Selecione um tipo de tarefa</Text>
+          <FlatList
+            data={taskTypes}
+            keyExtractor={(item) => item}
+            renderItem={({ item }) => (
+              <TouchableOpacity
+                style={styles.typeCard}
+                onPress={() => handleSelectType(item)}
+              >
+                <Text style={styles.taskTypeName}>{item}</Text>
+              </TouchableOpacity>
+            )}
+          />
+        </>
+      ) : (
+        <>
+          <Text style={styles.title}>{selectedType}</Text>
+          <FlatList
+            data={predefinedTasks.filter((task) => task.type === selectedType)}
+            keyExtractor={(item) => item.id.toString()}
+            renderItem={({ item }) => (
+              <TouchableOpacity
+                style={[styles.taskCard, { backgroundColor: item.color.light }]}
+                onPress={() => handleAddTask(item)}
+              >
+                <item.icon size={24} color="white" />
+                <Text style={styles.taskName}>{item.name}</Text>
+              </TouchableOpacity>
+            )}
+          />
+        </>
+      )}
     </View>
   );
 }
@@ -81,6 +114,13 @@ export default function PredefinedTasks() {
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: colors.gray[100], padding: 16 },
   title: { fontSize: 18, fontWeight: "bold", marginBottom: 16 },
+  typeCard: {
+    padding: 16,
+    borderRadius: 8,
+    marginBottom: 12,
+    backgroundColor: colors.gray[200],
+    alignItems: "center",
+  },
   taskCard: {
     flexDirection: "row",
     alignItems: "center",
@@ -92,6 +132,11 @@ const styles = StyleSheet.create({
     marginLeft: 16,
     fontSize: 16,
     color: "white",
+    fontWeight: "bold",
+  },
+  taskTypeName: {
+    fontSize: 16,
+    color: colors.gray[600],
     fontWeight: "bold",
   },
 });

@@ -21,13 +21,15 @@ type CircularProgressProps = {
   color: any;
   percentage: number;
   isTaskDone?: boolean;
+  maxProgress: number;
   icon?: React.ComponentType<TablerIconProps>;
 };
 
 const CircularProgress = ({
   title,
   color,
-  percentage: inicialPercentage = 75,
+  maxProgress,
+  percentage: inicialPercentage = 0,
   isTaskDone = false,
   icon: Icon,
 }: CircularProgressProps) => {
@@ -43,13 +45,15 @@ const CircularProgress = ({
   }, [inicialPercentage]);
 
   const animatedProps = useAnimatedProps(() => ({
-    strokeDashoffset: circumference - (circumference * progress.value) / 100,
+    strokeDashoffset:
+      circumference -
+      (circumference * (progress.value / maxProgress) * 100) / 100,
   }));
 
   const handlePress = () => {
     const targetValue = isChecked
-      ? Math.max(progress.value - 10, 0)
-      : Math.min(progress.value + 10, 100);
+      ? Math.max(progress.value - 1, 0)
+      : Math.min(progress.value + 1, maxProgress);
 
     progress.value = withSpring(targetValue, {
       damping: 10,
