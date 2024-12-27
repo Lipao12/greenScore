@@ -6,17 +6,13 @@ export const s = StyleSheet.create({
         flexDirection: "column",
         justifyContent: "flex-start",
         alignItems: "flex-start",
+        paddingTop: 16,
         paddingBottom: 16
     },
     title: {
-        fontSize: 40,
+        fontSize: 22,
         fontFamily: fontFamily.bold,
         color: colors.gray[600]
-    },
-    subtitle: {
-        fontSize: 14,
-        fontFamily: fontFamily.regular,
-        color: colors.gray[400],
     },
     cardContainer:{
         flexDirection: "row",

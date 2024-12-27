@@ -2,6 +2,7 @@ import { colors } from "@/styles/colors";
 import { IconLeaf } from "@tabler/icons-react-native";
 import { Text, View } from "react-native";
 import { s } from "./styles";
+import React from "react";
 
 export function Header() {
   return (

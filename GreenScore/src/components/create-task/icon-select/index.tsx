@@ -19,7 +19,6 @@ export const IconCard = ({
   icon: Icon,
   onPress,
 }: Props) => {
-  console.log(name, style_button, Icon);
   return (
     <TouchableOpacity
       style={[

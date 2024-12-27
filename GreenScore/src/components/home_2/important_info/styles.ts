@@ -3,24 +3,30 @@ import { StyleSheet } from "react-native";
 
 export const s = StyleSheet.create({
     container: {
+        backgroundColor: colors.project.terciary,
         flexDirection: "column",
         justifyContent: "flex-start",
         alignItems: "flex-start",
-        paddingBottom: 16
+        paddingVertical: 16,
+        paddingHorizontal: 16,
+        gap: 14
     },
     title: {
-        fontSize: 40,
-        fontFamily: fontFamily.bold,
+        fontSize: 24,
+        fontFamily: fontFamily.semiBold,
         color: colors.gray[600]
     },
     subtitle: {
-        fontSize: 14,
+        fontSize: 12,
         fontFamily: fontFamily.regular,
         color: colors.gray[400],
     },
-    cardContainer:{
+    widgetContainer: {
         flexDirection: "row",
-        justifyContent:"flex-start",
-        flexWrap: "wrap",
-    }
+        justifyContent: "flex-start",
+        alignItems: "flex-start",
+        paddingVertical: 16,
+        paddingHorizontal: 16,
+        gap: 14
+    },
 })

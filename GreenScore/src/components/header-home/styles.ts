@@ -6,8 +6,11 @@ export const s = StyleSheet.create({
         flexDirection: "column",
         justifyContent: "flex-start",
         alignItems: "flex-start",
-        paddingVertical: 16,
+        paddingBottom: 16,
+        paddingTop: 40,
+        paddingHorizontal: 16,
         gap: 10,
+        backgroundColor: "transparent"
     },
     title: {
         fontSize: 24,

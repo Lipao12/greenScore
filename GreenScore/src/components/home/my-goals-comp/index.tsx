@@ -62,31 +62,42 @@ export function MyGoalsComp() {
   progress={task.progress}
   icon={task.icon}
 />*/}
-      <View style={s.cardContainer}>
-        {tasks.map((task) => (
-          <CircularProgress
-            key={task.id}
-            title={task.name}
-            percentage={task.progress}
-            color={task.color}
-            icon={task.icon}
-            maxProgress={task.maxProgress}
-          />
-        ))}
-        {/*
-          <FlatList
+      <View
+        style={{
+          justifyContent: "center",
+          alignContent: "center",
+          width: "100%",
+        }}
+      >
+        <View style={[s.cardContainer]}>
+          {/*<FlatList
             data={tasks}
-            renderItem={({ item, index }) => (
+            numColumns={3}
+            keyExtractor={(item) => item.id.toString()}
+            renderItem={({ item }) => (
               <CircularProgress
                 key={item.id}
                 title={item.name}
                 percentage={item.progress}
                 color={item.color}
                 icon={item.icon}
+                maxProgress={item.maxProgress}
               />
             )}
-          />
-        */}
+          />*/}
+          {tasks.map((item) => {
+            return (
+              <CircularProgress
+                key={item.id}
+                title={item.name}
+                percentage={item.progress}
+                color={item.color}
+                icon={item.icon}
+                maxProgress={item.maxProgress}
+              />
+            );
+          })}
+        </View>
       </View>
     </View>
   );

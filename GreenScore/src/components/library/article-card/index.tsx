@@ -1,5 +1,6 @@
 import { Text, TouchableOpacity, View } from "react-native";
 import { s } from "./styles";
+import React from "react";
 
 type Props = {
   title: string;

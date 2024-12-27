@@ -2,6 +2,7 @@ import { colors } from "@/styles/colors";
 import { Dimensions, Text, View } from "react-native";
 import { BarChart, ProgressChart } from "react-native-chart-kit";
 import { s } from "./styles";
+import React from "react";
 
 type Props = {
   title?: string;

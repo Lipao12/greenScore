@@ -2,6 +2,7 @@ import { IconAward, IconDeviceGamepad3 } from "@tabler/icons-react-native";
 import { View } from "react-native";
 import { FastInfosCard } from "../fast-infos-card";
 import { s } from "./styles";
+import React from "react";
 
 export function FastInfos() {
   //IconAward   info_text="Sua comunidade economizou 1t de CO₂ este mês, o mesmo que plantar 50 árvores! 🌳🎉"

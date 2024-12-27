@@ -1,3 +1,4 @@
+import { updateHabitProgress } from "@/server/storage";
 import { colors } from "@/styles/theme";
 import {
   IconCheck,
@@ -17,21 +18,25 @@ import { s } from "./styles";
 const AnimatedCircle = Animated.createAnimatedComponent(Circle);
 
 type CircularProgressProps = {
+  id: any;
   title?: string;
   color: any;
   percentage: number;
-  isTaskDone?: boolean;
+  isDaily?: boolean;
   maxProgress: number;
   icon?: React.ComponentType<TablerIconProps>;
+  setCountDailyTask?: ({ done, all }: { done: number; all: number }) => void;
 };
 
 const CircularProgress = ({
+  id,
   title,
   color,
   maxProgress,
   percentage: inicialPercentage = 0,
-  isTaskDone = false,
+  isDaily = false,
   icon: Icon,
+  setCountDailyTask,
 }: CircularProgressProps) => {
   const radius = 40; // Tamanho reduzido
   const strokeWidth = 8; // Ajustando a espessura para o tamanho do círculo
@@ -42,6 +47,11 @@ const CircularProgress = ({
 
   useEffect(() => {
     progress.value = withTiming(inicialPercentage, { duration: 1000 });
+    if (isDaily && inicialPercentage >= maxProgress) {
+      setIsChecked(true);
+    } else {
+      setIsChecked(false);
+    }
   }, [inicialPercentage]);
 
   const animatedProps = useAnimatedProps(() => ({
@@ -51,19 +61,48 @@ const CircularProgress = ({
   }));
 
   const handlePress = () => {
-    const targetValue = isChecked
-      ? Math.max(progress.value - 1, 0)
-      : Math.min(progress.value + 1, maxProgress);
+    const newProgress = progress.value + 1;
+    if (isDaily) {
+      // Se for uma tarefa diária, só aumenta o progresso se ainda não atingiu 100%
+      if (progress.value < maxProgress) {
+        progress.value = withSpring(newProgress, {
+          damping: 10,
+          stiffness: 80,
+        });
 
-    progress.value = withSpring(targetValue, {
-      damping: 10,
-      stiffness: 80,
-    });
-    setIsChecked(!isChecked);
+        if (setCountDailyTask && newProgress <= maxProgress) {
+          setCountDailyTask((prev: any) => ({
+            done: prev.done + 1,
+            all: prev.all,
+          }));
+        }
+
+        // Verifica se atingiu 100% após o incremento
+        if (newProgress >= maxProgress) {
+          setIsChecked(true);
+        }
+      }
+    } else {
+      // Para tarefas não diárias, permite marcar/desmarcar livremente
+      const targetValue = isChecked
+        ? Math.max(progress.value - 1, 0)
+        : Math.min(newProgress, maxProgress);
+
+      progress.value = withSpring(targetValue, {
+        damping: 10,
+        stiffness: 80,
+      });
+      setIsChecked(!isChecked);
+    }
+    updateHabitProgress(id, newProgress);
   };
 
   return (
-    <TouchableOpacity onPress={handlePress} activeOpacity={0.8}>
+    <TouchableOpacity
+      onPress={handlePress}
+      activeOpacity={0.8}
+      style={{ marginHorizontal: 10 }}
+    >
       <View style={s.container}>
         <Svg height="100" width="100" viewBox="0 0 100 100">
           {/* Círculo de Fundo (background) */}
@@ -101,11 +140,11 @@ const CircularProgress = ({
 
         {/* Ícone no centro do círculo */}
         <View style={s.iconContainer}>
-          {Icon && <Icon width={32} height={32} color={color.dark} />}
+          {false && Icon && <Icon width={32} height={32} color={color.dark} />}
         </View>
 
         {/* Overlay para o check */}
-        {isChecked && (
+        {isChecked && isDaily && (
           <View style={s.overlay}>
             <IconCheck size={60} strokeWidth={5} color="#FFF" />
             <IconCheck
@@ -122,7 +161,7 @@ const CircularProgress = ({
       {title && (
         <View style={{ marginTop: 5, alignItems: "center" }}>
           <Text
-            numberOfLines={3}
+            numberOfLines={4}
             ellipsizeMode="tail"
             style={[
               s.title,

@@ -74,7 +74,12 @@ export const colors = {
     dark: "#2E0057",
   },
   
-  
+  project: {
+    secundary: "#344D0E",
+    terciary:"#22300B",
+    backGroundCards: "rgba(175,190,108,50)",
+    backGround: "rgba(196,228,119,80)",
+  },
 
   red: {
     light: "#FDEDED",

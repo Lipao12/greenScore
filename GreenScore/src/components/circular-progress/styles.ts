@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 export const s = StyleSheet.create({
     container: {
         alignItems: "center",
-        justifyContent: "center",
+        justifyContent: "center",        
       },
       textContainer: {
           flexDirection: "column",
@@ -12,7 +12,7 @@ export const s = StyleSheet.create({
           gap: 4,
         },
         title: {
-          fontSize: 12,
+          fontSize: 14,
                 maxWidth: 90,
                 textAlign: "center",
         },

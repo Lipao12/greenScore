@@ -8,7 +8,7 @@ import { fontFamily } from "@/styles/font-family";
 import { IconBike } from "@tabler/icons-react-native";
 import { useRouter } from "expo-router";
 import React from "react";
-import { Alert, FlatList, ScrollView, View } from "react-native";
+import { Alert, ScrollView, View } from "react-native";
 
 export default function Goals() {
   const router = useRouter();
@@ -28,9 +28,8 @@ export default function Goals() {
         title="Minhas Metas Pessoais"
         subtitle="Transforme pequenas ações diárias em grandes mudanças. Cada meta alcançada é um passo para hábitos mais sustentáveis, melhorando sua vida e o planeta. Seja protagonista da mudança!"
       />
-      <FlatList
-        data={tasks}
-        renderItem={({ item, index }) => (
+      {tasks.map((item) => {
+        return (
           <GoalsCard
             key={item.id}
             title={item.name}
@@ -61,8 +60,8 @@ export default function Goals() {
               );
             }}
           />
-        )}
-      />
+        );
+      })}
       <View
         style={{
           marginBottom: 16,
