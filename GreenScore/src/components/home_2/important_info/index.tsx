@@ -1,6 +1,7 @@
 import { ProgressBar } from "@/components/progress_bar";
+import { getConsecutiveSuccessfulDaysCount } from "@/server/storage";
 import { IconCloud, IconMedal } from "@tabler/icons-react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { View } from "react-native";
 import { ShowWidgets } from "../show_widgets";
 import { s } from "./styles";
@@ -11,7 +12,11 @@ interface Props {
 
 export function InportantInfo({ progress }: Props) {
   const progressPercentage = Math.floor((progress.done / progress.all) * 100);
+  const [consecutive, setConsecutive] = useState(0);
   console.log(progressPercentage);
+  useEffect(() => {
+    setConsecutive(getConsecutiveSuccessfulDaysCount());
+  }, []);
   return (
     <View style={s.container}>
       <ProgressBar progress={progressPercentage} />
@@ -19,7 +24,7 @@ export function InportantInfo({ progress }: Props) {
         <ShowWidgets
           text="dias fazendo as tarefas"
           icon={IconMedal}
-          value={"15"}
+          value={consecutive}
         />
         <ShowWidgets
           text="carbono economizado"

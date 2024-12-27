@@ -16,4 +16,5 @@ export interface Task {
     maxProgress: number,
     icon: React.ComponentType<TablerIconProps>,
     isDaily: boolean,
+    doneToday: boolean,
 }

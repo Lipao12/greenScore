@@ -86,9 +86,11 @@ export default function Home() {
       0
     );
 
+    const progressDone = daily.reduce((sum, task) => sum + task.progress, 0);
+
     setDailyTasks(daily);
     setNonDailyTasks(nonDaily);
-    setCountDailyTask({ done: 0, all: totalMaxProgress });
+    setCountDailyTask({ done: progressDone, all: totalMaxProgress });
 
     console.log("Daily: ", daily);
     console.log("totalMaxProgress: ", totalMaxProgress);
@@ -138,7 +140,9 @@ export default function Home() {
           styleContainer={{ backgroundColor: colors.project.secundary }}
           styleText={{ color: colors.gray[200] }}
         />
+
         <InportantInfo progress={countDailyTask} />
+
         <View style={{ paddingHorizontal: 16 }}>
           {dailyTasks.length > 0 && (
             <ShowGoals

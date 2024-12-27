@@ -89,6 +89,7 @@ const CreateTaskPage = () => {
       maxProgress: isDaily ? dailyFrequency : 41,
       icon: selectedIconComponent,
       isDaily: isDaily,
+      doneToday: false,
     };
 
     createTask(newTask);

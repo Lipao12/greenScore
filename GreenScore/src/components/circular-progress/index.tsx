@@ -1,4 +1,4 @@
-import { updateHabitProgress } from "@/server/storage";
+import { updateHabitDoneToday, updateHabitProgress } from "@/server/storage";
 import { colors } from "@/styles/theme";
 import {
   IconCheck,
@@ -19,6 +19,7 @@ const AnimatedCircle = Animated.createAnimatedComponent(Circle);
 
 type CircularProgressProps = {
   id: any;
+  doneToday?: boolean;
   title?: string;
   color: any;
   percentage: number;
@@ -30,6 +31,7 @@ type CircularProgressProps = {
 
 const CircularProgress = ({
   id,
+  doneToday,
   title,
   color,
   maxProgress,
@@ -62,6 +64,7 @@ const CircularProgress = ({
 
   const handlePress = () => {
     const newProgress = progress.value + 1;
+    console.log(doneToday);
     if (isDaily) {
       // Se for uma tarefa diária, só aumenta o progresso se ainda não atingiu 100%
       if (progress.value < maxProgress) {
@@ -84,15 +87,19 @@ const CircularProgress = ({
       }
     } else {
       // Para tarefas não diárias, permite marcar/desmarcar livremente
-      const targetValue = isChecked
-        ? Math.max(progress.value - 1, 0)
-        : Math.min(newProgress, maxProgress);
+      if (!doneToday) {
+        console.log("DIne TIday: ", doneToday);
+        const targetValue = isChecked
+          ? Math.max(progress.value - 1, 0)
+          : Math.min(newProgress, maxProgress);
 
-      progress.value = withSpring(targetValue, {
-        damping: 10,
-        stiffness: 80,
-      });
-      setIsChecked(!isChecked);
+        progress.value = withSpring(targetValue, {
+          damping: 10,
+          stiffness: 80,
+        });
+        updateHabitDoneToday(id, true);
+        setIsChecked(true);
+      }
     }
     updateHabitProgress(id, newProgress);
   };
@@ -144,7 +151,7 @@ const CircularProgress = ({
         </View>
 
         {/* Overlay para o check */}
-        {isChecked && isDaily && (
+        {(isChecked || doneToday) && (
           <View style={s.overlay}>
             <IconCheck size={60} strokeWidth={5} color="#FFF" />
             <IconCheck
@@ -165,7 +172,10 @@ const CircularProgress = ({
             ellipsizeMode="tail"
             style={[
               s.title,
-              { textDecorationLine: isChecked ? "line-through" : "none" },
+              {
+                textDecorationLine:
+                  isChecked || doneToday ? "line-through" : "none",
+              },
             ]}
           >
             {title}

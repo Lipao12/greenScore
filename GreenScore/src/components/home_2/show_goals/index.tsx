@@ -42,6 +42,7 @@ export function ShowGoals({ title, tasks, setCountDailyTask }: Props) {
                 icon={item.icon}
                 maxProgress={item.maxProgress}
                 isDaily={item.isDaily}
+                doneToday={item.doneToday}
                 setCountDailyTask={setCountDailyTask}
               />
             );

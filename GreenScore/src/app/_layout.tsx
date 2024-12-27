@@ -1,4 +1,5 @@
 import { Loading } from "@/components/loading";
+import { resetDailyProgress, storage } from "@/server/storage";
 import { GoalsProvider } from "@/server/task-maneger";
 import { colors } from "@/styles/colors";
 import {
@@ -18,7 +19,7 @@ import {
   useFonts,
 } from "@expo-google-fonts/rubik";
 import { Stack } from "expo-router";
-import React from "react";
+import React, { useEffect } from "react";
 //import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 export default function Layout() {
@@ -34,10 +35,13 @@ export default function Layout() {
     FuzzyBubbles_700Bold,
   });
 
+  useEffect(() => {
+    resetDailyProgress();
+  }, []);
+
   if (!fontsLoaded) {
     return <Loading />;
   }
-
   return (
     //<GestureHandlerRootView style={{ flex: 1 }}>
     <GoalsProvider>
